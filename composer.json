@@ -1,0 +1,16 @@
+{
+    "name": "itsliamjones/sms-handler",
+    "description": "Docker based REST interface for SMS Server Tools",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Liam Jones",
+            "email": "liam@plumbnation.co.uk"
+        }
+    ],
+    "require": {
+        "silex/silex": "~2.0",
+        "itsliamjones/sms": "dev-master"
+    }
+}

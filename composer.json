@@ -6,11 +6,16 @@
     "authors": [
         {
             "name": "Liam Jones",
-            "email": "liam@plumbnation.co.uk"
+            "email": "liam@plumbnation.co.uk",
+            "role": "Lead Developer"
         }
     ],
     "require": {
         "silex/silex": "~2.0",
         "itsliamjones/sms": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "mikey179/vfsStream": "^1.6"
     }
 }

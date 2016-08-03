@@ -9,7 +9,9 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app    = new App();
 $client = new Sms\Gateway();
 
-$app['debug'] = true;
+if (in_array(getenv('DEV_ENVIRONEMENT'), ['1', 'true'])) {
+	$app['debug'] = true;
+}
 
 /**
  * Retrieve all messages

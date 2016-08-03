@@ -9,5 +9,6 @@ unit-tests:
 	./vendor/bin/phpunit
 
 image-build:
-	@read -p "Enter Image Tag:" image_tag; \
+	@echo "Building Image";
+	@read -p "Enter Tag[]: " image_tag; \
 		docker build -t $$image_tag .

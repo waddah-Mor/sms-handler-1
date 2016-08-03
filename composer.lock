@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsliamjones/sms.git",
-                "reference": "f76f37c73ddca8246adc831f46b457bf42d5081d"
+                "reference": "befb18af693c9fea1c4df8a34b43455f49f28d75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsliamjones/sms/zipball/f76f37c73ddca8246adc831f46b457bf42d5081d",
-                "reference": "f76f37c73ddca8246adc831f46b457bf42d5081d",
+                "url": "https://api.github.com/repos/itsliamjones/sms/zipball/befb18af693c9fea1c4df8a34b43455f49f28d75",
+                "reference": "befb18af693c9fea1c4df8a34b43455f49f28d75",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 }
             ],
             "description": "Simple wrapper for SMS Server Tools",
-            "time": "2016-08-02 15:04:20"
+            "time": "2016-08-03 11:00:37"
         },
         {
             "name": "pimple/pimple",

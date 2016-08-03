@@ -6,20 +6,29 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new App();
+$app    = new App();
+$client = new Sms\Gateway();
 
 $app['debug'] = true;
-
-$client = new Sms\Gateway();
 
 /**
  * Retrieve all messages
  */
 $app->get('/sms', function (Request $request) use ($app, $client) {
 
-	$messages = array_map( function (Sms\MessageReceived $message = null) {
-		return $message->flatten();
-	}, $client->getIncoming());
+	$messages = array_map(
+		function (Sms\MessageReceived $message = null) {
+			return $message->flatten();
+		},
+		$client->getIncoming(
+			in_array(
+				$request->get('expunge'),
+				[
+					1, "true"
+				]
+			)
+		)
+	);
 
 	return $app->json($messages);
 });

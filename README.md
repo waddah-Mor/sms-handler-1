@@ -38,6 +38,6 @@ If you've compiled from GitHub, please substitute your image tag in on build com
 docker run -d \
 	--name sms-handler \
 	-p 47563:80 \
-    -v /var/spool/sms/:/var/spool/sms/ \
-    {insert-image-tag}
+    -v /path/to/local/spool:/var/spool/sms/ \
+    itsliamjones/sms-handler
 ```

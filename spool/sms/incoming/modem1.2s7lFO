@@ -1,0 +1,18 @@
+From: 447417433741
+From_TOA: 91 international, ISDN/telephone
+From_SMSC: 447782000800
+Sent: 17-02-17 10:48:00
+Received: 17-02-17 10:48:04
+Subject: modem1
+Modem: modem1
+IMSI: 234200003367431
+IMEI: 353058021587663
+Report: no
+Alphabet: ISO
+Length: 118
+UDH: no
+
+SMS STATUS REPORT
+Message_id: 12
+Discharge_timestamp: 17-02-17 10:48:01
+Status: 0,Ok,short message received by the SME

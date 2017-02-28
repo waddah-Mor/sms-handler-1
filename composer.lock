@@ -4,49 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "845c509fda6722f65589e0726b2387fb",
+    "content-hash": "547e0b7244748d88956b4cd64e098a15",
     "packages": [
-        {
-            "name": "itsliamjones/sms",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/itsliamjones/sms.git",
-                "reference": "befb18af693c9fea1c4df8a34b43455f49f28d75"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/itsliamjones/sms/zipball/befb18af693c9fea1c4df8a34b43455f49f28d75",
-                "reference": "befb18af693c9fea1c4df8a34b43455f49f28d75",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "phpunit/phpunit": "@stable"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sms\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Liam Jones",
-                    "email": "liam@plumbnation.co.uk",
-                    "role": "Lead Developer"
-                }
-            ],
-            "description": "Simple wrapper for SMS Server Tools",
-            "time": "2016-08-03 11:00:37"
-        },
         {
             "name": "pimple/pimple",
             "version": "v3.0.2",
@@ -1976,7 +1935,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "itsliamjones/sms": 20,
         "phpunit/phpunit": 0
     },
     "prefer-stable": false,

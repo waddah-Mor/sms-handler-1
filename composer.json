@@ -12,7 +12,6 @@
     ],
     "require": {
         "silex/silex": "~2.0",
-        "itsliamjones/sms": "dev-master",
         "php": "^5.6 || ^7.0"
     },
     "require-dev": {

@@ -11,34 +11,11 @@ use Sms\RequestMatcherIps;
 require_once __DIR__.'/../vendor/autoload.php';
 
 $app    = new App();
-$client = new Gateway();
-
+$client = new Sms\Gateway();
 
 if (in_array(getenv('DEV_ENVIRONEMENT'), ['1', 'true'])) {
 	$app['debug'] = true;
 }
-
-//test get and restrict ips
-$app->get('/', function (Request $request) use ($app, $client) {
-
-    /*$reqMatcher = new RequestMatcherIps();
-    
-    $ipIsMatched = $reqMatcher->checkIpsList($request);*/
-
-    $ipIsMatched = RequestMatcherIps::checkIpsList($request);
-    
-    if ($ipIsMatched) {
-
-    	$messages = array('home');
-
-    }else{
-
-    	$messages = array('Error' => 'Access is denied');
-
-    }
-
-	return $app->json($messages);
-});
 
 
 /**
@@ -52,6 +29,8 @@ $app->get('/sms', function (Request $request) use ($app, $client) {
     //to run it against the restrict ips list
     //return true (if matched) or false
     $ipIsMatched = $reqMatcher->checkIpsList($request);
+
+    /*$ipIsMatched = RequestMatcherIps::checkIpsList($request);*/
     
     //Matched an ip (Access Granted)
     if ($ipIsMatched) {

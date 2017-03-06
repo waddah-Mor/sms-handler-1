@@ -9,11 +9,11 @@ use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 class RequestMatcherIps extends RequestMatcher
 {
 
-    protected $ips = null;
+    private $ips = null;
 
-    protected $allowedIps = array();
+    private $allowedIps = array();
 
-    protected $restrictIps = ture;
+    private $restrictIps = ture;
 
     /*protected $allowedIps = array('waddah-local' => '192.168.16.133', 
                                     'pndev-local' => '192.168.16.33', 
@@ -38,7 +38,7 @@ class RequestMatcherIps extends RequestMatcher
 
 
     //filter and move the restrict ips into array
-    protected function getIpsArray($ips){
+    private function getIpsArray($ips){
         
         $ips = explode(',', trim($ips));
         
@@ -49,7 +49,7 @@ class RequestMatcherIps extends RequestMatcher
     }
 
 
-    //check if client ip match any of the restrict ips and return true (if matched) or false
+    //check if client ip match any of the restrict ips and return true (if matched)
     public function checkIpsList(Request $request){
 
     	$isMatched = false;
@@ -57,10 +57,8 @@ class RequestMatcherIps extends RequestMatcher
         //if there's a restricted ips then run them against the client's ip
         if ($this->restrictIps) {
 
-            foreach ($this->allowedIps as $ip) {
-
                 //create new RequestMatcher object with the wanted restrict ip
-                $reqMatcher = new RequestMatcher(null, null, null, $ip);
+                $reqMatcher = new RequestMatcher(null, null, null, $this->allowedIps);
 
                 //return true if the client ip match the restrict ip
                 $isMatched = $reqMatcher->matches($request);
@@ -70,10 +68,6 @@ class RequestMatcherIps extends RequestMatcher
                     //Matched an ip (Access Granted)
                     return $isMatched;
                 }
-            }
-
-            //No ips have matched (Access Denied)
-            return $isMatched;
 
         }else{
 

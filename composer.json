@@ -12,7 +12,8 @@
     ],
     "require": {
         "silex/silex": "~2.0",
-        "php": "^5.6 || ^7.0"
+        "php": "^5.6 || ^7.0",
+        "symfony/security": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",

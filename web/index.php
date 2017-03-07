@@ -12,70 +12,53 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app    = new App();
 $client = new Sms\Gateway();
-//$user = new User('admin', '123', ['ROLE_ADMIN']);
 
 if (in_array(getenv('DEV_ENVIRONEMENT'), ['1', 'true'])) {
 	$app['debug'] = true;
 }
 
-//access the environment var 'RESTRICT_IPS' which contain the restricted ips
-$ips = getenv('RESTRICT_IPS');
+//return array of restricted ips 
+$ips = new Sms\CheckIPs();
+$app['ips'] = $ips->getIpsArray();
 
-//Check if restricted ips are set
-if ($ips) {
-	
-	//filter ips into array
-    getIpsArray($ips);
-
-	try{
-		if (!in_array($_SERVER['REMOTE_ADDR'], $app['ips'])){
-			throw new Exception(
-					"Ip address do not match"
-				);
+//Check if restricted ips are set 
+if ($app['ips']) {
+	//check if client ip match one of restricted ips
+	//if it doesn't then it throw an exception and exit script
+	try {
+		if (!in_array($_SERVER['REMOTE_ADDR'], $app['ips'])) {
+			throw new Exception("Ip address do not match");
 		}
-	}catch (Exception $e) {
+	} catch (Exception $e) {
 		echo 'error: ',  $e->getMessage();
 		exit();
 	}
 }
 
+//access the environment vars username and password
+$user = getenv('USERNAME');
+$pass = getenv('PASSWORD');
 
 //Password Encoder
 $salt = null; //is Null because it is ignored in the BCryptPasswordEncoder class (not used)
 
 $encoder = new BCryptPasswordEncoder(5);
 
-$password = $encoder->encodePassword('123', $salt);
+$password = $encoder->encodePassword($pass, $salt);
 
 //Password Firewall 
 $app->register(new SecurityServiceProvider(), array(
-    'security.firewalls' => array(
+	'security.firewalls' => array(
 	    'admin' => array(
 	        'pattern' => '^/sms',
-        	//'pattern' => new RequestMatcher('^/sms', null, null, '192.168.16.33'),
+			//'pattern' => new RequestMatcher('^/sms', null, null, '192.168.16.33'),
 	        'http' => true,
 	        'users' => array(
-	            'admin' => array('ROLE_ADMIN', $password),
+	            $user => array('ROLE_ADMIN', $password),
 	        ),
 	    ),
 	)
 ));
-
-
-//filter restrict ips into array
-function getIpsArray($ips){
-
-	global $app;
-    
-    $ips = explode(',', trim($ips));
-    
-    foreach ($ips as $ip) {
-        
-        $allowedIps []= $ip;
-    }
-
-    $app['ips'] = $allowedIps;
-}
 
 /**
  * Retrieve all messages
@@ -104,7 +87,7 @@ $app->get('/sms', function (Request $request) use ($app, $client) {
  */
 $app->get('/sms/failed', function (Request $request) use ($app, $client) {
 
-	$message = array_map(		
+	$message = array_map(
 		function (Sms\MessageFailed $message = null) {
 			return $message->flatten();
 		},
@@ -126,8 +109,7 @@ $app->get('/sms/failed', function (Request $request) use ($app, $client) {
  */
 $app->post('/sms', function (Request $request) use ($app, $client) {
 
-	if (
-		is_null($request->get('to'))
+	if (is_null($request->get('to'))
 		|| is_null($request->get('body'))
 	) {
 		throw new \Exception(
@@ -149,7 +131,6 @@ $app->post('/sms', function (Request $request) use ($app, $client) {
 		],
 		200
 	);
-
 });
 
 /**
